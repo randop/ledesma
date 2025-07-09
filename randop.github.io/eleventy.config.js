@@ -15,7 +15,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection("posts", function (collectionApi) {
     return collectionApi
       .getFilteredByGlob("posts/*.md")
-      .sort((a, b) => b.date - a.date)
+      .sort((a, b) => a.date - b.date)
       .slice(0, 15); // Only take the first 10 posts
   });
 
