@@ -37,7 +37,7 @@ jobs:
           # Github pages repository configuration
           external_repository: randop/randop.github.io
           publish_branch: master
-          publish_dir: _site # Directory containing the built site
+          publish_dir: ./randop.github.io/_site # Directory containing the built site
 
           commit_message: "Deploy randop.github.io: ${{ github.sha }}"
 
