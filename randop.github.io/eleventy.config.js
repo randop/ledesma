@@ -1,3 +1,5 @@
+const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("bundle.css");
 
@@ -7,6 +9,32 @@ module.exports = function (eleventyConfig) {
       .getFilteredByGlob("posts/*.md")
       .sort((a, b) => b.date - a.date)
       .slice(0, 5); // Only take the first 10 posts
+  });
+
+  eleventyConfig.addCollection("posts", function (collectionApi) {
+    return collectionApi
+      .getFilteredByGlob("posts/*.md")
+      .sort((a, b) => b.date - a.date)
+      .slice(0, 15); // Only take the first 10 posts
+  });
+
+  eleventyConfig.addPlugin(feedPlugin, {
+    type: "atom",
+    outputPath: "/feed.xml",
+    collection: {
+      name: "posts", // iterate over `collections.posts`
+      limit: 15,
+    },
+    metadata: {
+      language: "en",
+      title: "Randolph Ledesma Blog",
+      subtitle:
+        "Discover expert insights, practical tips, and engaging stories on AI vibe coding, web development and programming.",
+      base: "https://randop.github.io/",
+      author: {
+        name: "Randolph Ledesma",
+      },
+    },
   });
 
   // Add date filter for formatting

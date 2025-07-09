@@ -55,6 +55,10 @@ pids
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-
 # Eleventy static site
 _site
+
+# PNPM
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*

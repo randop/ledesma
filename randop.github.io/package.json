@@ -1,0 +1,16 @@
+{
+  "name": "randop.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "keywords": [],
+  "author": "Randolph Ledesma",
+  "license": "CFL",
+  "dependencies": {
+    "@11ty/eleventy-plugin-rss": "^2.0.4"
+  }
+}
