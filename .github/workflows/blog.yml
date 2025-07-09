@@ -11,6 +11,9 @@ jobs:
       run:
         working-directory: ./randop.github.io
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout website repository
         uses: actions/checkout@v4
