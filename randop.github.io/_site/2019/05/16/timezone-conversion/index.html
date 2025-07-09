@@ -1,0 +1,26 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timezone Conversion</title>
+  </head>
+  <body>
+    <h1>Timezone Conversion</h1>
+    <p>Converting a timestamp from and to a different timezones.</p>
+<pre><code>&lt;?php
+$timestamp='2019-05-16 07:56:00';
+$format=&quot;Y-m-d H:i:s&quot;;
+$from_timezone='Asia/Manila';
+$to_timezone='America/Chicago';
+$source_timezone = new DateTimeZone($from_timezone);
+$destination_timezone = new DateTimeZone($to_timezone);
+$datetime = new DateTime($timestamp, $source_timezone);
+$offset = $destination_timezone-&gt;getOffset($datetime);
+$newdate = date($format, $datetime-&gt;format('U') + $offset);
+echo $newdate;
+</code></pre>
+
+  </body>
+</html>

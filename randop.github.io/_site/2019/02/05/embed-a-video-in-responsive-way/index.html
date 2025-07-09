@@ -1,0 +1,36 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed a &lt;video&gt; in responsive way</title>
+  </head>
+  <body>
+    <h1>Embed a &lt;video&gt; in responsive way</h1>
+    <p>This is how to embed a video on a page and make it responsive.</p>
+<pre><code>&lt;style type=&quot;text/css&quot;&gt;
+.video-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+.video-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+&lt;/style&gt;
+
+&lt;div class=&quot;video-responsive&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/XXXXX&quot; 
+        frameborder=&quot;0&quot; 
+        width=&quot;970&quot; height=&quot;548&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</code></pre>
+
+  </body>
+</html>

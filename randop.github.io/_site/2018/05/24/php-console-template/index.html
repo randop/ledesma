@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Console Template</title>
+  </head>
+  <body>
+    <h1>PHP Console Template</h1>
+    <p>A template to use when making a script that runs in command-line.</p>
+<pre><code class="language-php">&lt;?php
+ini_set('memory_limit', '256M');
+function stdoutlog($msg)
+{
+    fwrite(STDOUT, date('Y-m-d G:i:s') . ' ');
+    fwrite(STDOUT, $msg);
+    fwrite(STDOUT, PHP_EOL);
+}
+function log_error( $num, $str, $file, $line, $context = null )
+{
+    log_exception( new ErrorException( $str, 0, $num, $file, $line ) );
+}
+function log_exception( Exception $e )
+{
+    $err = &quot;Type: &quot; . get_class( $e ) . &quot;; Message: {$e-&gt;getMessage()}; File: {$e-&gt;getFile()}; Line: {$e-&gt;getLine()};&quot;;
+    stdoutlog($err);
+}
+function check_for_fatal()
+{
+    $error = error_get_last();
+    if ( $error[&quot;type&quot;] == E_ERROR ) {
+        log_error( $error[&quot;type&quot;], $error[&quot;message&quot;], $error[&quot;file&quot;], $error[&quot;line&quot;] );
+    }
+}
+register_shutdown_function( &quot;check_for_fatal&quot; );
+set_error_handler( &quot;log_error&quot; );
+set_exception_handler( &quot;log_exception&quot; );
+error_reporting(E_ALL &amp; ~(E_STRICT|E_NOTICE|E_DEPRECATED|E_USER_DEPRECATED));
+ini_set('error_reporting', E_ALL &amp; ~(E_STRICT|E_NOTICE|E_DEPRECATED|E_USER_DEPRECATED));
+chdir( realpath( __DIR__) );
+</code></pre>
+
+  </body>
+</html>

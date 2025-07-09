@@ -1,0 +1,20 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Reflection to access protected properties in PHP</title>
+  </head>
+  <body>
+    <h1>Using Reflection to access protected properties in PHP</h1>
+    <p>Here is how to access protected class properties. Reflection is generally a method for   inspecting classes and modify its logic at execution time.</p>
+<pre><code class="language-php">&lt;?php
+$class = new ReflectionClass($classInstance);
+$property = $class-&gt;getProperty(&quot;properties&quot;);
+$property-&gt;setAccessible(true);
+$properties = $property-&gt;getValue($number);
+</code></pre>
+
+  </body>
+</html>

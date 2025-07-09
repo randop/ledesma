@@ -1,0 +1,18 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find function declaration in PHP</title>
+  </head>
+  <body>
+    <h1>Find function declaration in PHP</h1>
+    <p>This is a simple way to find where the function is defined on your script</p>
+<pre><code class="language-php">&lt;?php
+$reflFunc = new ReflectionFunction('function_name');
+print $reflFunc-&gt;getFileName() . ':' . $reflFunc-&gt;getStartLine();
+</code></pre>
+
+  </body>
+</html>

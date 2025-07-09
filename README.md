@@ -1,10 +1,10 @@
-# Randolph Ledesma Website Engine
+# Websites
 
 ## License
 ```
 Creative Freedom License (CFL)
 
-Copyright © 2022 Randolph Ledesma. All rights reserved.
+Copyright © 2022-2025 Randolph Ledesma. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this work and associated documentation files (the "Work"), to deal in the Work
