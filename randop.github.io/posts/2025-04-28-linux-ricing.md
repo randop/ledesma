@@ -2,7 +2,7 @@
 layout: post
 title:  "Trending: Linux Ricing"
 date: 2025-04-28T06:23:00+08:00
-hero_image: https://commons.wikimedia.org/wiki/File:Fedora-Core-6-AIGLX.png
+hero_image: https://upload.wikimedia.org/wikipedia/commons/c/cb/Fedora-Core-6-AIGLX.png
 categories: linux youtube
 ---
 I still remember back in 2009 where I'm at the office on my former workplace installing [Compiz Fusion](https://www.compiz-fusion.org/) on my Fedora Linux workstation. It was really fun tweaking desktop. There is different kind of satisfaction to Linux ricing that Windows or Mac does not provide to this date.
