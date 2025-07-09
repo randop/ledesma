@@ -6,11 +6,19 @@ title: Randolph Ledesma Blog
 <html lang="en">
   <head>
     {% include "meta.njk" %}
-    <title>{{ title }}</title>
+    <title>Randolph Ledesma: {{ title }}</title>
     <link rel="stylesheet" href="/bundle.css">
+    <!-- Prism CSS from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <!-- Prism JS core and language-specific files with defer -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
   </head>
   <body>
     <h1>{{ title }}</h1>
+    <h4>{{ date }}</h4>
     {{ content | safe }}
   </body>
 </html>
