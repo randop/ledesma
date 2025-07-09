@@ -42,4 +42,4 @@ jobs:
           commit_message: "Deploy randop.github.io: ${{ github.sha }}"
 
           # add new files but leave existing ones untouched
-          keep_files: true
+          keep_files: false
