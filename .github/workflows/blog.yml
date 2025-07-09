@@ -27,4 +27,4 @@ jobs:
       - name: Install eleventy
         run: pnpm install -g @11ty/eleventy
       - name: Generate static content
-        run: pnpm exec eleventy
+        run: eleventy
