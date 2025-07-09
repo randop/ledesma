@@ -25,3 +25,18 @@ jobs:
         run: pnpm install -g @11ty/eleventy
       - name: Generate static content
         run: eleventy
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/master' # Only deploy on main branch
+        with:
+          personal_token: ${{ secrets.GIT_HUB_WORKFLOW_TOKEN }}
+
+          # Github pages repository configuration
+          external_repository: randop/randop.github.io
+          publish_branch: master
+          publish_dir: ./_site # Directory containing the built site
+
+          commit_message: "Deploy randop.github.io: ${{ github.sha }}"
+
+          # add new files but leave existing ones untouched
+          keep_files: true
