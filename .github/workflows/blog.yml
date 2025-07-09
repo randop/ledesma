@@ -1,6 +1,10 @@
 name: Deploy blog to GitHub Pages
 
 on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
   workflow_dispatch: # Allow manual triggering
 
 jobs:
