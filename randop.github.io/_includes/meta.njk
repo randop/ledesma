@@ -16,7 +16,7 @@
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://randop.github.io/">
+<meta property="og:url" content="{{("https://randop.github.io" + page.url) or "https://randop.github.io/"}}">
 <meta property="og:title" content="{{ title or "Randolph Ledesma | BLOG - Insights, Tips & Stories" }}">
 <meta property="og:description" content="Discover expert insights, practical tips, and engaging stories on AI, vibe coding, web development and programming.">
 <meta property="og:image" content="{{ hero_image or "https://randop.github.io/images/og-image.jpg" }}">
@@ -28,7 +28,7 @@
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://randop.github.io/">
+<meta property="twitter:url" content="{{("https://randop.github.io" + page.url) or "https://randop.github.io/"}}">
 <meta property="twitter:title" content="{{ title or "Randolph Ledesma | BLOG - Insights, Tips & Stories" }}">
 <meta property="twitter:description" content="Discover expert insights, practical tips, and engaging stories on AI, vibe coding, web development and programming.">
 <meta property="twitter:image" content="{{ hero_image or "https://randop.github.io/images/og-image.jpg" }}">
