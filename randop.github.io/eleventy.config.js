@@ -1,4 +1,6 @@
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPassthroughCopy("bundle.css");
+
   // Top 5 latest posts
   eleventyConfig.addCollection("latestPosts", function (collectionApi) {
     return collectionApi

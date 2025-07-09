@@ -1,5 +1,5 @@
 ---
-layout: layout.njk
+layout: primary
 title: Randolph Ledesma Blog
 ---
 
