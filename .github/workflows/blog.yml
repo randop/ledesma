@@ -20,7 +20,7 @@ jobs:
           version: latest
           run_install: false
       - name: Setup Node.js
-        run: pnpm env use — global lts
+        run: pnpm env use --global lts
       - name: Install eleventy
         run: pnpm install -g @11ty/eleventy
       - name: Generate static content
