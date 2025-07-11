@@ -1,10 +1,16 @@
 name: Deploy blog to GitHub Pages
 
+# Trigger on changes in the randop.github.io directory
+
 on:
   push:
     branches: ["master"]
+    paths:
+      - 'randop.github.io/**'
   pull_request:
     branches: ["master"]
+    paths:
+      - 'randop.github.io/**'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
