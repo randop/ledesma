@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta charset="utf8" />
+        <title>VIBE CODING</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    </head>
+    <body>
+        <script src="lightgl.js"></script>
+        <script>
+            var willRotate = true;
+            var animationTime = 0;
+            var angle = 0;
+            var gl = GL.create();
+            var mesh = GL.Mesh.cube();
+            mesh.transform(GL.Matrix.scale(0.5, 0.5, 0.5));
+
+var shader = new GL.Shader('\
+  void main() {\
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+  }\
+', '\
+  void main() {\
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\
+  }\
+');
+
+setInterval(function(){
+  angle = 45 * animationTime;
+}, 2000);
+
+            gl.onupdate = function(seconds) {
+              if (willRotate) {
+                animationTime = seconds;
+              }
+            };
+
+            gl.ondraw = function() {
+              gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+              gl.clearColor(1.0, 1.0, 1.0, 0.0);
+              gl.loadIdentity();
+              gl.translate(0, 0, -5);
+              gl.rotate(7, 0.5, 0, 0);
+
+              gl.color(0.1, 0.1, 0.1);
+              gl.lineWidth(1);
+              gl.begin(gl.LINES);
+              for (var i = -10; i <= 10; i++) {
+                gl.vertex(i, 0, -10);
+                gl.vertex(i, 0, +10);
+                gl.vertex(-10, 0, i);
+                gl.vertex(+10, 0, i);
+              }
+              gl.end();
+
+              mesh.transform(GL.Matrix.rotate(angle, 0, 1, 0));
+              shader.draw(mesh);
+            };
+
+            gl.fullscreen();
+            gl.animate();
+        </script>
+    </body>
+</html>
