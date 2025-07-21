@@ -3,6 +3,8 @@ const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets/*.js");
   eleventyConfig.addPassthroughCopy("assets/*.css");
+  eleventyConfig.addPassthroughCopy("assets/*.jpg");
+  eleventyConfig.addPassthroughCopy("assets/*.png");
 
   // Top 5 latest posts
   eleventyConfig.addCollection("latestPosts", function (collectionApi) {
