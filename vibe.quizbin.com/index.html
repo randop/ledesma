@@ -1,65 +1,185 @@
 <!doctype html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta charset="utf8" />
-        <title>VIBE CODING</title>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    </head>
-    <body>
-        <script src="lightgl.js"></script>
-        <script>
-            var willRotate = true;
-            var animationTime = 0;
-            var angle = 0;
-            var gl = GL.create();
-            var mesh = GL.Mesh.cube();
-            mesh.transform(GL.Matrix.scale(0.5, 0.5, 0.5));
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="utf8" />
+  <title>VIBE</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-var shader = new GL.Shader('\
-  void main() {\
-    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
-  }\
-', '\
-  void main() {\
-    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\
-  }\
-');
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
 
-setInterval(function(){
+    canvas {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #overlay {
+        background: rgba(17, 17, 17, 0.3);
+      }
+    }
+
+    @media (prefers-color-scheme: light) {
+      #overlay {
+        background: rgba(255, 255, 255, 0.85);
+      }
+    }
+  </style>
+</head>
+<body>
+<script src="lightgl.js"></script>
+<script type="text/javascript">
+function getCurrentTheme() {
+  try {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+  } catch (err) {
+    //void
+  }
+  return 'light';
+}
+
+function setCanvasBackground() {
+    const theme = getCurrentTheme();
+    if (theme === 'dark') {
+        gl.clearColor(0.25, 0.25, 0.25, 1.0);
+    } else {
+        gl.clearColor(1.0, 1.0, 1.0, 1.0);
+    }
+}
+
+var willRotate = true;
+var animationTime = 0;
+var angle = 0;
+var gl = GL.create();
+var mesh = GL.Mesh.cube();
+mesh.transform(GL.Matrix.scale(0.5, 0.5, 0.5));
+
+var cubeShader = new GL.Shader(
+  "\
+  void main() {\
+  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+  }\
+  ",
+  "\
+  void main() {\
+  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\
+  }\
+  ",
+);
+
+var shader = new GL.Shader(
+  "\
+  void main() {\
+  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+  }\
+  ",
+  "\
+  void main() {\
+  gl_FragColor = vec4(0.55, 0.0, 0.0, 1.0);\
+  }\
+  ",
+);
+
+setInterval(function () {
   angle = 45 * animationTime;
 }, 2000);
 
-            gl.onupdate = function(seconds) {
-              if (willRotate) {
-                animationTime = seconds;
-              }
-            };
+function createFaceGridMesh() {
+  var mesh = new GL.Mesh({ lines: true });
+  var s = 0.5;
+  var divisions = 5;
+  var step = (s * 2) / divisions;
 
-            gl.ondraw = function() {
-              gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-              gl.clearColor(1.0, 1.0, 1.0, 0.0);
-              gl.loadIdentity();
-              gl.translate(0, 0, -5);
-              gl.rotate(7, 0.5, 0, 0);
+  var vertices = [];
+  var lines = [];
 
-              gl.color(0.1, 0.1, 0.1);
-              gl.lineWidth(1);
-              gl.begin(gl.LINES);
-              for (var i = -10; i <= 10; i++) {
-                gl.vertex(i, 0, -10);
-                gl.vertex(i, 0, +10);
-                gl.vertex(-10, 0, i);
-                gl.vertex(+10, 0, i);
-              }
-              gl.end();
+  function addLine(x1, y1, z1, x2, y2, z2) {
+    var idx = vertices.length / 3;
+    vertices.push(x1, y1, z1);
+    vertices.push(x2, y2, z2);
+    lines.push([idx, idx + 1]);
+  }
 
-              mesh.transform(GL.Matrix.rotate(angle, 0, 1, 0));
-              shader.draw(mesh);
-            };
+  for (var i = 0; i <= divisions; i++) {
+    var t = -s + i * step;
 
-            gl.fullscreen();
-            gl.animate();
-        </script>
-    </body>
+    addLine(s, t, -s, s, t, s);
+    addLine(s, -s, t, s, s, t);
+    addLine(-s, t, -s, -s, t, s);
+    addLine(-s, -s, t, -s, s, t);
+
+    addLine(-s, s, t, s, s, t);
+    addLine(t, s, -s, t, s, s);
+    addLine(-s, -s, t, s, -s, t);
+    addLine(t, -s, -s, t, -s, s);
+
+    addLine(-s, t, s, s, t, s);
+    addLine(t, -s, s, t, s, s);
+    addLine(-s, t, -s, s, t, -s);
+    addLine(t, -s, -s, t, s, -s);
+  }
+
+  mesh.vertices = [];
+  for (var j = 0; j < vertices.length; j += 3) {
+    mesh.vertices.push([vertices[j], vertices[j + 1], vertices[j + 2]]);
+  }
+  mesh.lines = lines;
+  mesh.compile();
+  return mesh;
+}
+
+var cubeGrid = createFaceGridMesh();
+
+gl.onupdate = function (seconds) {
+  if (willRotate) {
+    animationTime = seconds;
+  }
+};
+
+gl.ondraw = function () {
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  setCanvasBackground();
+  gl.loadIdentity();
+  gl.translate(0, 0, -5);
+  gl.rotate(7, 0.5, 0, 0);
+
+  gl.color(0.1, 0.1, 0.1);
+  gl.lineWidth(1);
+  gl.begin(gl.LINES);
+  for (var i = -10; i <= 10; i++) {
+    gl.vertex(i, 0, -10);
+    gl.vertex(i, 0, +10);
+    gl.vertex(-10, 0, i);
+    gl.vertex(+10, 0, i);
+  }
+  gl.end();
+  gl.pushMatrix();
+
+  mesh.transform(GL.Matrix.rotate(angle, 0, 1, 0));
+  cubeShader.draw(mesh);
+  cubeGrid.transform(GL.Matrix.rotate(angle, 0, 1, 0));
+  shader.draw(cubeGrid, gl.LINES);
+
+  gl.popMatrix();
+};
+
+gl.fullscreen();
+gl.animate();
+</script>
+
+</body>
 </html>

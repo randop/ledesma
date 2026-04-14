@@ -10,9 +10,16 @@ var GL = function() {
     var r = {
         create: function(r) {
             r = r || {};
-            var a = document.createElement("canvas");
-            a.width = 800;
-            a.height = 600;
+            var a;
+            if (r.canvas) {
+                a = r.canvas;
+                if (!a.width) a.width = window.innerWidth || 800;
+                if (!a.height) a.height = window.innerHeight || 600;
+            } else {
+                a = document.createElement("canvas");
+                a.width = window.innerWidth || 800;
+                a.height = window.innerHeight || 600;
+            }
             if (!("alpha"in r))
                 r.alpha = false;
             try {
@@ -367,7 +374,9 @@ var GL = function() {
                 throw new Error("document.body doesn't exist yet (call gl.fullscreen() from " + "window.onload() or from inside the <body> tag)")
             }
             document.body.appendChild(t.canvas);
-            document.body.style.overflow = "hidden";
+            if ("noOverflow" in r) {
+              document.body.style.overflow = "hidden";
+            }
             t.canvas.style.position = "absolute";
             t.canvas.style.left = i + "px";
             t.canvas.style.top = e + "px";
