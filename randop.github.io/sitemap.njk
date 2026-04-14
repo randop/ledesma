@@ -6,7 +6,7 @@ layout: null
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for post in collections.all -%}
-  {%- if not post.url.endsWith(".css") and not post.url.endsWith(".xml") -%}
+  {%- if not post.data.sitemapIgnore and not post.url.endsWith(".css") and not post.url.endsWith(".xml") and post.url !== "/" -%}
   <url>
     <loc>{{ site.baseUrl | default(site.url) }}{{ post.url | url }}</loc>
     {%- if post.date -%}
