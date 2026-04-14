@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
-Disallow:
+
+Disallow: /_admin/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /draft/
 
 Sitemap: https://randop.github.io/sitemap.xml
