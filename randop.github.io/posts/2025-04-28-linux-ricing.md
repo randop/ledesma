@@ -10,7 +10,7 @@ I still remember back in 2009 where I'm at the office on my former workplace ins
 <p><a href="https://commons.wikimedia.org/wiki/File:Fedora-Core-6-AIGLX.png#/media/File:Fedora-Core-6-AIGLX.png"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Fedora-Core-6-AIGLX.png" alt="Fedora-Core-6-AIGLX.png" height="240" width="320"></a></p>
 
 Fast forward now in 2025, a popular youtuber have posted a viral video of Linux ricing experience.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pVI_smLgTY0?si=nevwSneQCOkIWKjS" title="YouTube:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pVI_smLgTY0" title="YouTube:
     I installed Linux (so should you) by @PewDiePie" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
