@@ -10,6 +10,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets/*.jpg");
   eleventyConfig.addPassthroughCopy("assets/*.png");
   eleventyConfig.addPassthroughCopy("robots.txt");
+  eleventyConfig.addPassthroughCopy("google*.html");
 
   // Top 5 latest posts
   eleventyConfig.addCollection("latestPosts", function (collectionApi) {
