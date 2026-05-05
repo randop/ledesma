@@ -4,11 +4,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta charset="utf8" />
   <title>VIBE</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
 
   <style>
     html, body {
       height: 100%;
+      width: 100%;
       margin: 0;
       padding: 0;
       overflow: auto;
@@ -37,6 +38,42 @@
       }
     }
   </style>
+  <script type="text/javascript">
+(function (window, document) {
+  'use strict';
+
+  function ready(fn) {
+    if (document.readyState === 'complete') {
+      // Already loaded
+      return fn();
+    }
+
+    if (document.addEventListener) {
+      document.addEventListener('DOMContentLoaded', fn, false);
+      window.addEventListener('load', fn, false);
+    } else if (document.attachEvent) {
+      // IE8 and below
+      document.attachEvent('onreadystatechange', function () {
+        if (document.readyState === 'complete') {
+          fn();
+        }
+      });
+      window.attachEvent('onload', fn);
+    } else {
+      // Extremely old fallback
+      var oldOnload = window.onload;
+      window.onload = function () {
+        if (oldOnload) oldOnload();
+        fn();
+      };
+    }
+  }
+
+  // Expose globally
+  window.domReady = ready;
+
+})(window, document);
+  </script>
 </head>
 <body>
 <script src="lightgl.js"></script>
@@ -177,8 +214,10 @@ gl.ondraw = function () {
   gl.popMatrix();
 };
 
-gl.fullscreen();
-gl.animate();
+domReady(function () {
+  gl.fullscreen();
+  gl.animate();
+});
 </script>
 
 </body>
